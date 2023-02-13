@@ -2,6 +2,7 @@ package mall.infra;
 
 import javax.naming.NameParser;
 
+
 import javax.naming.NameParser;
 import javax.transaction.Transactional;
 

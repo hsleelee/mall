@@ -76,15 +76,15 @@ public class MypageViewHandler {
         }
     }
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenDeliveryReturned_then_UPDATE_3(@Payload DeliveryReturned deliveryReturned) {
+    public void whenDeliveryReturned_then_UPDATE_3(@Payload DeliveryCancelled deliveryCancelled) {
         try {
-            if (!deliveryReturned.validate()) return;
+            if (!deliveryCancelled.validate()) return;
                 // view 객체 조회
 
-                List<Mypage> mypageList = mypageRepository.findByOrderId(deliveryReturned.getOrderId());
+                List<Mypage> mypageList = mypageRepository.findByOrderId(deliveryCancelled.getOrderId());
                 for(Mypage mypage : mypageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    mypage.setStatus(deliveryReturned.getStatus());
+                    mypage.setStatus(deliveryCancelled.getStatus());
                 // view 레파지 토리에 save
                 mypageRepository.save(mypage);
                 }
