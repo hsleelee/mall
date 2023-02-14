@@ -16,14 +16,17 @@ spec:
     spec:
       containers:
         - name: order
-          image: username/order:latest
+          image: cyberlhsdev/order:v20230213
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              cpu: "200m"            
           readinessProbe:
             httpGet:
               path: '/actuator/health'
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             timeoutSeconds: 2
             periodSeconds: 5
             failureThreshold: 10
